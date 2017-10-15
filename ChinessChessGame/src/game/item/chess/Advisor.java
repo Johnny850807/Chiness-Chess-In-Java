@@ -5,6 +5,7 @@ import java.awt.Image;
 import game.ChessBoard;
 import game.ChessColor;
 
+//¤h
 public class Advisor extends Chess {
 
 	public Advisor(ChessBoard context, ChessColor color, Image img) {

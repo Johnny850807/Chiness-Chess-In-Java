@@ -6,7 +6,7 @@ import game.ChessBoard;
 import game.ChessColor;
 import game.ChessName;
 import game.item.chess.Chess;
-import game.item.chess.Generals;
+import game.item.chess.General;
 
 import static game.ChessName.*;
 import static game.ChessColor.*;
@@ -20,7 +20,7 @@ public class ChessPrototypeFactory {
 	}
 
 	public void prepare() {
-		chessMap.put(new ChessInfo(GENERAL, RED), new Generals(context, RED, null));
+		chessMap.put(new ChessInfo(GENERAL, RED), new General(context, RED, null));
 	}
 
 	public Chess createChess(ChessName name, ChessColor color) {

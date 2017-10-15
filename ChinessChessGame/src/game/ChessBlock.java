@@ -1,5 +1,8 @@
 package game;
 
-public class ChessBlock {
+import game.item.chess.Chess;
 
+public class ChessBlock {
+	private Chess chess;
+	
 }

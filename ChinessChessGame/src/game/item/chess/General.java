@@ -5,13 +5,15 @@ import java.awt.Image;
 import game.ChessBoard;
 import game.ChessColor;
 
-public class Generals extends Chess {
+//±N­x
+public class General extends Chess {
 
-	public Generals(ChessBoard context, ChessColor color, Image img) {
+	public General(ChessBoard context, ChessColor color, Image img) {
 		super(context, color, img);
 	}
 
 	public boolean canMoveTo(int x, int y) {
+		
 		return false;
 	}
 
