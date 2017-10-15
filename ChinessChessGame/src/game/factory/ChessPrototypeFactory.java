@@ -1,6 +1,10 @@
 package game.factory;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import game.ChessBoard;
 import game.ChessColor;
@@ -17,25 +21,31 @@ public class ChessPrototypeFactory {
 	
 	public ChessPrototypeFactory(ChessBoard context) {
 		this.context = context;
-		prepare();
+		
+		try{
+			prepare();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	public void prepare() {
-		chessMap.put(new ChessInfo(ROOK, RED), new General(context, RED, null));
-		chessMap.put(new ChessInfo(KNIGHT, RED), new General(context, RED, null));
-		chessMap.put(new ChessInfo(ELEPHANT, RED), new General(context, RED, null));
-		chessMap.put(new ChessInfo(ADVISOR, RED), new General(context, RED, null));
-		chessMap.put(new ChessInfo(GENERAL, RED), new General(context, RED, null));
-		chessMap.put(new ChessInfo(SOILDIER, RED), new General(context, RED, null));
-		chessMap.put(new ChessInfo(CANNON, RED), new General(context, RED, null));
+	public void prepare() throws IOException {
+		chessMap.put(new ChessInfo(ROOK, RED), new General(context, RED, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(KNIGHT, RED), new General(context, RED, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(ELEPHANT, RED), new General(context, RED, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(ADVISOR, RED), new General(context, RED, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(GENERAL, RED), new General(context, RED, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(SOILDIER, RED), new General(context, RED, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(CANNON, RED), new General(context, RED, ImageIO.read(new File("chess/red_soildier.png"))));
 		
-		chessMap.put(new ChessInfo(ROOK, BLACK), new General(context, BLACK, null));
-		chessMap.put(new ChessInfo(KNIGHT, BLACK), new General(context, BLACK, null));
-		chessMap.put(new ChessInfo(ELEPHANT, BLACK), new General(context, BLACK, null));
-		chessMap.put(new ChessInfo(ADVISOR, BLACK), new General(context, BLACK, null));
-		chessMap.put(new ChessInfo(GENERAL, BLACK), new General(context, BLACK, null));
-		chessMap.put(new ChessInfo(SOILDIER, BLACK), new General(context, BLACK, null));
-		chessMap.put(new ChessInfo(CANNON, BLACK), new General(context, BLACK, null));
+		chessMap.put(new ChessInfo(ROOK, BLACK), new General(context, BLACK, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(KNIGHT, BLACK), new General(context, BLACK, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(ELEPHANT, BLACK), new General(context, BLACK, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(ADVISOR, BLACK), new General(context, BLACK, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(GENERAL, BLACK), new General(context, BLACK, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(SOILDIER, BLACK), new General(context, BLACK, ImageIO.read(new File("chess/red_soildier.png"))));
+		chessMap.put(new ChessInfo(CANNON, BLACK), new General(context, BLACK, ImageIO.read(new File("chess/red_soildier.png"))));
 	}
 
 	public Chess createChess(ChessName name, ChessColor color) {

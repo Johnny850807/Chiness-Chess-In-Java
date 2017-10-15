@@ -35,6 +35,7 @@ public class ChinessChessGame{
 			public void run() {
 				chessBoard.setupBoard();
 				gameStarted = true;
+				callback.onGameStatusUpdated(chessBoard);
 				callback.onGameStarted();
 				runPlayerTurns();
 			};
@@ -67,4 +68,5 @@ public class ChinessChessGame{
 	public void rollback() {
 		chessBoard.rollback();
 	}
+	
 }

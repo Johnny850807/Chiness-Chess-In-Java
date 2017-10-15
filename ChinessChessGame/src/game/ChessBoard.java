@@ -100,9 +100,12 @@ public class ChessBoard{
 	}
 	
 	public boolean hasChess(int x, int y){
-		return chesses[x][y] != null;
+		return chesses[y][x] != null;
 	}
 	
+	public Chess[][] getChesses() {
+		return chesses;
+	}
 	
 	public Chess[][] getClonedChesses(){
 		Chess[][] cloned = new Chess[10][9];

@@ -46,14 +46,6 @@ public abstract class Chess extends PaintObject implements Cloneable{
 		this.color = color;
 	}
 
-	public Image getImg() {
-		return image;
-	}
-
-	public void setImg(Image img) {
-		this.image = img;
-	}
-
 	@Override
 	public Chess clone(){
 		return (Chess)super.clone();
