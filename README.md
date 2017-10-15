@@ -1,2 +1,4 @@
 # Chiness-Chess-In-Java
-The chinese chess open source in native Java implementation with JFrame.
+How to develop a Chiness Chess Game in ONE DAY in JAVA JFrame ?
+
+The project shows an answer.
