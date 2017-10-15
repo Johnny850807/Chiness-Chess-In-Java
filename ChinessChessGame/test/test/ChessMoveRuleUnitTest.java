@@ -18,12 +18,13 @@ public class ChessMoveRuleUnitTest {
 		chesses = chessBoard.getChesses();
 	}
 
-	//@Test
+	@Test
 	public void testSoildier() {
 		Chess soildier = chessBoard.getChess(0, 6);
-		assertTrue(soildier.canMoveTo(0, 2)); //can go forward
-		assertTrue(!soildier.canMoveTo(0, 8)); //cannot go forward twice
+		assertTrue(soildier.canMoveTo(0, 5)); //can go forward
+		assertTrue(!soildier.canMoveTo(0, 4)); //cannot go forward twice
 		assertTrue(!soildier.canMoveTo(0, 7)); //cannot go back
+		assertTrue(!soildier.canMoveTo(1, 6)); //cannot go right
 		chessBoard.moveAndGetEatenChess(soildier, 1, 4);
 		
 		assertTrue(soildier.canMoveTo(0, 4)); //can go left

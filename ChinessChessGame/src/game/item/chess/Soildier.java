@@ -1,6 +1,10 @@
 package game.item.chess;
 
+import java.awt.Dimension;
 import java.awt.Image;
+import java.security.KeyStore.PrivateKeyEntry;
+import java.util.HashSet;
+import java.util.Set;
 
 import game.ChessBoard;
 import game.ChessColor;
@@ -14,7 +18,23 @@ public class Soildier extends Chess {
 
 	@Override
 	public boolean validateDistination(int x, int y) {
-		return true;
+		if (context.isAcrossRiver(getColor(), x, y))
+			return isStraightAndForward(x, y);
+		
+		return isOnlyForward(x, y);
+	}
+	
+	private boolean isStraightAndForward(int x, int y){
+		Set<Dimension> straightSet = new HashSet<>();
+		straightSet.add(new Dimension(getX() + 1, getY()));
+		straightSet.add(new Dimension(getX() - 1, getY()));
+		straightSet.add(new Dimension(getX(), getY() - 1));
+		
+		return straightSet.contains(new Dimension(x, y));
+	}
+	
+	private boolean isOnlyForward(int x, int y){
+		return x == getX() && y == getY() - 1;
 	}
 
 }
