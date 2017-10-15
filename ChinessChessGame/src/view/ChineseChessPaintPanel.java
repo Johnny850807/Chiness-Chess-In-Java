@@ -27,7 +27,8 @@ import media.SoundPlayer;
 
 public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseListener, MouseMotionListener, KeyListener{
 	private Image backgroundImage;
-	private Image selectedImage;
+	private Image selectedImageRed;
+	private Image selectedImageBlack;
 	private	ChinessChessGame chessGame;
 	private ChessBoard chessBoard;
 	
@@ -39,7 +40,8 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 	public ChineseChessPaintPanel(ChinessChessGame chessGame, Image backgroundImage) throws IOException{
 		this.chessGame = chessGame;
 		this.backgroundImage = backgroundImage;
-		this.selectedImage = ImageIO.read(new File("selected.png"));
+		this.selectedImageRed = ImageIO.read(new File("selected_red.png"));
+		this.selectedImageBlack = ImageIO.read(new File("selected_black.png"));
 		setupDimensionBlock();
 		setFocusable(true);  //ensure that the keyboard event can be passed into the panel.
 		addKeyListener(this);
@@ -81,7 +83,7 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
         
         if (closestToMouseDimension != null)
         {
-        	g.drawImage(selectedImage, (int)(closestToMouseDimension.getWidth() - OFFSET_SELECTED_X - OFFSET_X), 
+        	g.drawImage(getSelectedImageByCurrectPlayer(), (int)(closestToMouseDimension.getWidth() - OFFSET_SELECTED_X - OFFSET_X), 
         			(int)(closestToMouseDimension.getHeight() - OFFSET_SELECTED_Y - OFFSET_Y), 
         				SELECTED_BLOCK_SIZE, SELECTED_BLOCK_SIZE, null);
         }
@@ -89,11 +91,15 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
         if (selectedChess != null)
         {		
         	Dimension selectedDimension = chessDimensionBlock[selectedChess.getY()][selectedChess.getX()];
-        	g.drawImage(selectedImage, (int)(selectedDimension.getWidth() - OFFSET_SELECTED_X - OFFSET_X), 
+        	g.drawImage(getSelectedImageByCurrectPlayer(), (int)(selectedDimension.getWidth() - OFFSET_SELECTED_X - OFFSET_X), 
         			(int)(selectedDimension.getHeight() - OFFSET_SELECTED_Y - OFFSET_Y), 
         				SELECTED_BLOCK_SIZE, SELECTED_BLOCK_SIZE, null);
         }
     }
+	
+	private Image getSelectedImageByCurrectPlayer(){
+		return currentTurnPlayer.getTeam() == ChessColor.RED ? selectedImageRed : selectedImageBlack;
+	}
 
 	@Override
 	public void onGameStarted() {
