@@ -35,7 +35,7 @@ public class ChineseChessPaintPane extends JPanel implements CallBack, MouseList
 
 	@Override
 	public void onGameStarted() {
-		
+		repaint();  // paint the prepared chesses.
 	}
 
 	@Override

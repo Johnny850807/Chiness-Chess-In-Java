@@ -29,4 +29,20 @@ public class ChessBoard {
 		ChessMoveCommand chessMoveCommand = moveCommandStack.pop();
 		chessMoveCommand.rollback();
 	}
+	
+	public boolean isAcrossCastle(Chess chess){
+		return false;
+	}
+	
+	public boolean isAcrossRiver(Chess chess){
+		return false;
+	}
+	
+	public Chess getChess(int x, int y){
+		return chesses[y][x];
+	}
+	
+	public boolean hasChess(int x, int y){
+		return chesses[x][y] != null;
+	}
 }

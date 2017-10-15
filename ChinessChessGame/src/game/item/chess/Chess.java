@@ -7,19 +7,17 @@ import game.ChinessChessGame;
 import game.PaintObject;
 
 public abstract class Chess extends PaintObject implements Cloneable{
+	protected ChessBoard context;
+	protected ChessColor color;
 
-	private ChessBoard context;
-
-	private ChessColor color;
-
-	private int x;
-
-	private int y;
-
-	private Image img;
+	
+	public Chess(ChessBoard context, ChessColor color, Image img) {
+		this.context = context;
+		this.color = color;
+		this.image = img;
+	}
 
 	public abstract boolean canMoveTo(int x, int y);
-	
 	
 	public ChessBoard getContext() {
 		return context;
@@ -38,11 +36,11 @@ public abstract class Chess extends PaintObject implements Cloneable{
 	}
 
 	public Image getImg() {
-		return img;
+		return image;
 	}
 
 	public void setImg(Image img) {
-		this.img = img;
+		this.image = img;
 	}
 
 	@Override

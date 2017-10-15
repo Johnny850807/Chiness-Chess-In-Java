@@ -3,9 +3,9 @@ package game;
 import java.awt.Image;
 
 public class PaintObject {
-	private int x;
-	private int y;
-	private Image image;
+	protected int x;
+	protected int y;
+	protected Image image;
 	
 	public int getX() {
 		return x;

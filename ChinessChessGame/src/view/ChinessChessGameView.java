@@ -64,6 +64,5 @@ public class ChinessChessGameView extends JFrame{
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 }
