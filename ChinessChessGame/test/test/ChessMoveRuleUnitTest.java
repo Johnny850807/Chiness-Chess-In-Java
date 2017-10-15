@@ -14,10 +14,11 @@ public class ChessMoveRuleUnitTest {
 	@Before
 	public void setUp() throws Exception {
 		chessBoard = new ChessBoard();
+		chessBoard.setupBoard();
 		chesses = chessBoard.getChesses();
 	}
 
-	@Test
+	//@Test
 	public void testSoildier() {
 		Chess soildier = chessBoard.getChess(0, 6);
 		assertTrue(soildier.canMoveTo(0, 2)); //can go forward
@@ -32,7 +33,7 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.rollback();
 	}
 	
-	@Test
+	//@Test
 	public void testConnon() {
 		Chess connon = chessBoard.getChess(1, 7);
 		assertTrue(connon.canMoveTo(1, 3)); //can across many blocks
@@ -45,7 +46,7 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.rollback();
 	}
 	
-	@Test
+	//@Test
 	public void testRook() {
 		Chess rook = chessBoard.getChess(0, 9);
 		assertTrue(rook.canMoveTo(0, 8)); //can across one block
@@ -61,7 +62,7 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.rollback();
 	}
 	
-	@Test
+	//@Test
 	public void testKnight() {
 		Chess knight = chessBoard.getChess(1, 9); //left knight
 		assertTrue(knight.canMoveTo(2, 7)); //can go right vertically without block
@@ -113,17 +114,21 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.moveAndGetEatenChess(advisor, 4, 8); //go middle of the castle
 		assertTrue(advisor.canMoveTo(3, 7)); //can go to the four directions
 		assertTrue(advisor.canMoveTo(5, 7));
-		assertTrue(advisor.canMoveTo(5, 9));
 		
 		chessBoard.moveAndGetEatenChess(advisor, 5, 7); //go right top of the castle
 		assertTrue(advisor.canMoveTo(4, 8));
 		assertTrue(!advisor.canMoveTo(6, 8)); //cannot go out of the castle
 		
+		chessBoard.moveAndGetEatenChess(advisor, 3, 7); //go left top of the castle
+		assertTrue(advisor.canMoveTo(4, 8));
+		assertTrue(!advisor.canMoveTo(2, 8)); //cannot go out of the castle
+		
+		chessBoard.rollback();
 		chessBoard.rollback();
 		chessBoard.rollback();
 	}
 	
-	@Test
+	//@Test
 	public void testGeneral() {
 		Chess general = chessBoard.getChess(4, 9);
 		chessBoard.moveAndGetEatenChess(general, 4, 8); //go middle of the castle
