@@ -8,3 +8,7 @@ The project shows an answer.
 1. go to the command window.
 2. type `cd ChinessChessGame`
 3. type `java -jar ChinessChessGame.jar`
+
+
+
+![image](https://user-images.githubusercontent.com/23109467/31587730-7dce839e-b219-11e7-93bb-04302077959f.png)
