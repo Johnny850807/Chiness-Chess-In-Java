@@ -14,7 +14,7 @@ public class Cannon extends NeedCountBlockingChess {
 
 	@Override
 	public boolean validateDistination(int x, int y) {
-		return isStraight(x, y) && getBlockedAmount(x, y) <= 1;
+		return isStraight(x, y) && (getBlockedAmount(x, y) == 1 || !context.hasChess(x, y));
 	}
 	
 	private boolean isStraight(int x, int y){

@@ -64,7 +64,7 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.rollback();
 	}
 	
-	//@Test
+	@Test
 	public void testKnight() {
 		Chess knight = chessBoard.getChess(1, 9); //left knight
 		assertTrue(knight.canMoveTo(2, 7)); //can go right vertically without block
