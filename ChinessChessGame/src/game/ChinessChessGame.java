@@ -56,9 +56,10 @@ public class ChinessChessGame{
 	}
 
 	public void moveChess(Player player, Chess chess, int x, int y) {
-		if (validateChessMove(player, chess, x, y))
+		if (chessBoard.getWinColor() == ChessColor.NO_COLOR && validateChessMove(player, chess, x, y))
 		{
 			chessBoard.executeMoveCommand(new ChessMoveCommandImp(x, y, chess, chessBoard));
+			callback.onMoveSuccessfully(player, chess);
 			onNextPlayerTurn();
 		}
 		else

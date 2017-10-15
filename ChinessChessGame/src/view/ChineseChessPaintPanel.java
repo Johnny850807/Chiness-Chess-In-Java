@@ -3,8 +3,6 @@ package view;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -12,18 +10,20 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.imageio.ImageIO;
+import javax.sound.midi.MidiDevice.Info;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.xml.bind.Marshaller.Listener;
 
 import game.CallBack;
 import game.ChessBoard;
+import game.ChessColor;
 import game.ChinessChessGame;
 import game.item.chess.Chess;
 import game.player.Player;
+import media.SoundPlayer;
 
 public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseListener, MouseMotionListener, KeyListener{
 	private Image backgroundImage;
@@ -113,19 +113,25 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 
 	@Override
 	public void onMoveRejected(Player player, Chess chess) {
-		// TODO Auto-generated method stub
-		
+		SoundPlayer.getSoundManager().playSound("media/error.wav");
+	}
+	
+	@Override
+	public void onMoveSuccessfully(Player player, Chess chess) {
+		SoundPlayer.getSoundManager().playSound("media/put.wav");
 	}
 
 	@Override
 	public void onGameOver(Player winner) {
+		SoundPlayer.getSoundManager().playSound("media/gameover.wav");
 		System.out.println("The winner is " + winner.getTeam().toString() + ".");
+		JOptionPane.showMessageDialog(null, "恭喜  " + winner.getName() +
+				 (winner.getTeam() == ChessColor.RED ? "(紅色)" : "(黑色)") + " 贏得遊戲。", 
+		"遊戲結束", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
 	public void mousePressed(MouseEvent e) {}
@@ -209,7 +215,16 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_R)
-			chessGame.rollback();
+		{
+			int selectedOption = JOptionPane.showConfirmDialog(null, 
+                    "確定要悔棋嗎 ?", 
+                    "悔棋", 
+                    JOptionPane.YES_NO_OPTION); 
+			if (selectedOption == JOptionPane.YES_OPTION) {
+				chessGame.rollback();
+			}
+		}
+			
 	}
 
 	

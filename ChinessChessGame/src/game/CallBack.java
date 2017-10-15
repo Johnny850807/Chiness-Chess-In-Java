@@ -10,6 +10,8 @@ public interface CallBack {
 
 	public void onGameStatusUpdated(ChessBoard chessBoard);
 
+	public void onMoveSuccessfully(Player player, Chess chess);
+	
 	public void onMoveRejected(Player player, Chess chess);
 
 	public void onGameOver(Player winner);
