@@ -47,7 +47,7 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.rollback();
 	}
 	
-	//@Test
+	@Test
 	public void testRook() {
 		Chess rook = chessBoard.getChess(0, 9);
 		assertTrue(rook.canMoveTo(0, 8)); //can across one block
@@ -129,7 +129,7 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.rollback();
 	}
 	
-	//@Test
+	@Test
 	public void testGeneral() {
 		Chess general = chessBoard.getChess(4, 9);
 		chessBoard.moveAndGetEatenChess(general, 4, 8); //go middle of the castle
@@ -142,7 +142,7 @@ public class ChessMoveRuleUnitTest {
 		assertTrue(!general.canMoveTo(5, 7));
 
 		chessBoard.moveAndGetEatenChess(chessBoard.getChess(4, 0), 5, 7); //move the opposite general to right side
-		assertTrue(!general.canMoveTo(5, 8)); //cannot face to the opposite general
+		assertTrue(general.canMoveTo(5, 8)); //general can eat the opposite general if face to face
 		
 		chessBoard.rollback();
 		chessBoard.rollback();
