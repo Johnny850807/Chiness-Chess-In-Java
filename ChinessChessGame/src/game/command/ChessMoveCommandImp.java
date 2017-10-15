@@ -1,21 +1,25 @@
 package game.command;
 
+import game.ChessBoard;
 import game.item.chess.Chess;
 
 public class ChessMoveCommandImp implements ChessMoveCommand {
 	private int x;
 	private int y;
+	private ChessBoard context;
 	private ChessMemento memento;
 	private Chess chess;
 	
-	public ChessMoveCommandImp(int x, int y, Chess chess) {
+	public ChessMoveCommandImp(int x, int y, Chess chess, ChessBoard context) {
 		this.x = x;
 		this.y = y;
 		this.chess = chess;
+		this.context = context;
 		this.memento = new ChessMemento(chess.getX(), chess.getY());
 	}
 
 	public void execute() {
+		
 		chess.setX(x);
 		chess.setY(y);
 	}
@@ -26,6 +30,7 @@ public class ChessMoveCommandImp implements ChessMoveCommand {
 	}
 
 	private class ChessMemento{
+		private Chess eatenChess;  // the chess at the location in the last move (got eaten)
 		private int back_x;
 		private int back_y;
 		

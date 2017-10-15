@@ -53,7 +53,7 @@ public class ChinessChessGame{
 
 	public void moveChess(Player player, Chess chess, int x, int y) {
 		if (validateChessMove(player, chess, x, y))
-			chessBoard.executeMoveCommand(new ChessMoveCommandImp(x, y, chess));
+			chessBoard.executeMoveCommand(new ChessMoveCommandImp(x, y, chess, chessBoard));
 		else
 			callback.onMoveRejected(player, chess);
 	}

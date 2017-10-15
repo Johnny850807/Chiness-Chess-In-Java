@@ -33,8 +33,8 @@ public class ChessBoard {
 		chessMoveCommand.rollback();
 	}
 	
-	public boolean isAcrossCastle(ChessColor color, int x, int y){
-		return chessLocationValidator.isAcrossCastle(color, x, y);
+	public boolean isInsideCastle(ChessColor color, int x, int y){
+		return chessLocationValidator.isInsideCastle(color, x, y);
 	}
 	
 	public boolean isAcrossRiver(ChessColor color, int x, int y){
