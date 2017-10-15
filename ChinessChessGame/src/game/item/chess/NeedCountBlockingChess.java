@@ -32,9 +32,8 @@ public abstract class NeedCountBlockingChess extends Chess{
 				if (context.hasChess(getX(), i))
 					count ++;
 		}
-			
 		
-		return count - (context.hasChess(x, y) ? 1 : 0); //minus one for not counting the eaten chess in.
+		return count; //minus one for not counting the eaten chess in.
 	}
 
 }

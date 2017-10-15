@@ -34,7 +34,7 @@ public class ChessMoveRuleUnitTest {
 		chessBoard.rollback();
 	}
 	
-	//@Test
+	@Test
 	public void testConnon() {
 		Chess connon = chessBoard.getChess(1, 7);
 		assertTrue(connon.canMoveTo(1, 3)); //can across many blocks
@@ -53,8 +53,9 @@ public class ChessMoveRuleUnitTest {
 		assertTrue(rook.canMoveTo(0, 8)); //can across one block
 		chessBoard.moveAndGetEatenChess(rook, 0, 8);
 
-		assertTrue(rook.canMoveTo(8, 8)); //can across many blocks
+		assertTrue(rook.canMoveTo(8, 8)); //can go forward many blocks
 		assertTrue(!rook.canMoveTo(0, 5)); //cannot across any chess
+		assertTrue(!rook.canMoveTo(0, 2)); //cannot across many blocks
 		
 		chessBoard.moveAndGetEatenChess(rook, 3, 8);
 		assertTrue(!rook.canMoveTo(4, 7)); //cannot go obliquely
