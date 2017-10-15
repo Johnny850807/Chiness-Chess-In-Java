@@ -1,4 +1,5 @@
 package game.player;
+import game.ChessBoard;
 import game.ChessColor;
 import game.command.ChessMoveCommand;
 
@@ -12,6 +13,7 @@ public abstract class Player {
 		this.team = team;
 	}
 
+	public abstract ChessMoveCommand makeChoice(ChessBoard chessBoard);
 
 	public String getName() {
 		return name;
