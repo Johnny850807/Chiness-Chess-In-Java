@@ -14,7 +14,7 @@ public class Soildier extends Chess {
 
 	@Override
 	public boolean validateDistination(int x, int y) {
-		return false;
+		return true;
 	}
 
 }

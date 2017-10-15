@@ -37,24 +37,30 @@ public class ChinessChessGame{
 				gameStarted = true;
 				callback.onGameStatusUpdated(chessBoard);
 				callback.onGameStarted();
-				runPlayerTurns();
+				onNextPlayerTurn();
 			};
 		}.start();
 	}
 
-	private void runPlayerTurns() {
-		while(chessBoard.getWinColor() == ChessColor.NO_COLOR)  // if nobody wins
-			onNextPlayerTurn();
-	}
 	
 	public void onNextPlayerTurn() {
-		nowTurnPlayer = nowTurnPlayer == players[1] ? players[0] : players[1];
-		callback.onPlayerTurn(nowTurnPlayer);
+		ChessColor winTeam = chessBoard.getWinColor();
+		if (winTeam == ChessColor.NO_COLOR)  // if nobody wins
+		{
+			nowTurnPlayer = nowTurnPlayer == players[1] ? players[0] : players[1];
+			callback.onPlayerTurn(nowTurnPlayer);
+		}
+		else
+			callback.onGameOver(players[0].getTeam() == winTeam ? players[0] : players[1]);
+		
 	}
 
 	public void moveChess(Player player, Chess chess, int x, int y) {
 		if (validateChessMove(player, chess, x, y))
+		{
 			chessBoard.executeMoveCommand(new ChessMoveCommandImp(x, y, chess, chessBoard));
+			onNextPlayerTurn();
+		}
 		else
 			callback.onMoveRejected(player, chess);
 	}
@@ -66,7 +72,9 @@ public class ChinessChessGame{
 	}
 
 	public void rollback() {
+		System.out.println("Rollback enforcing.");
 		chessBoard.rollback();
+		callback.onGameStatusUpdated(chessBoard);
 	}
 	
 }

@@ -1,30 +1,25 @@
 package view;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import game.CallBack;
-import game.ChessBoard;
 import game.ChinessChessGame;
-import game.item.chess.Chess;
-import game.player.Player;
 
 public class ChinessChessGameView extends JFrame{
 	private final int WIDTH;
 	private final int HEIGHT;
-	private ChineseChessPaintPane paintPane;
+	private ChineseChessPaintPanel paintPane;
 	
 	public ChinessChessGameView(ChinessChessGame chessGame) throws IOException{
 		Image backgroundImage = ImageIO.read(new File("chessboard.png"));
-		this.paintPane = new ChineseChessPaintPane(chessGame, backgroundImage);
+		this.paintPane = new ChineseChessPaintPanel(chessGame, backgroundImage);
 		WIDTH = backgroundImage.getWidth(null);
 		HEIGHT = backgroundImage.getHeight(null);
 		setupUI();

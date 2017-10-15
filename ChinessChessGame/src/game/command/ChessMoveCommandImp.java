@@ -33,10 +33,9 @@ public class ChessMoveCommandImp implements ChessMoveCommand {
 			throw new IllegalStateException("Why there is a chess eaten when rolling back?");
 		
 		Chess eatenChess = memento.getEatenChess();
-		back = context.moveAndGetEatenChess(eatenChess, eatenChess.getX(), eatenChess.getY());
-		if (back != memento.getMovedChess())
-			throw new IllegalStateException("Why the eatenChess does not eat the eatingChess when rolling back?");
 		
+		if (eatenChess != null)
+			back = context.moveAndGetEatenChess(eatenChess, eatenChess.getX(), eatenChess.getY());
 		memento = null;
 	}
 

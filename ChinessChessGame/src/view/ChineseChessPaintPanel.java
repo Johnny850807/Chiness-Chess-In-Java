@@ -3,11 +3,16 @@ package view;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,21 +25,24 @@ import game.ChinessChessGame;
 import game.item.chess.Chess;
 import game.player.Player;
 
-public class ChineseChessPaintPane extends JPanel implements CallBack, MouseListener, MouseMotionListener{
+public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseListener, MouseMotionListener, KeyListener{
 	private Image backgroundImage;
 	private Image selectedImage;
 	private	ChinessChessGame chessGame;
 	private ChessBoard chessBoard;
 	
+	private Player currentTurnPlayer;
 	private Dimension[][] chessDimensionBlock = new Dimension[10][9]; // used to determine all the chesses' location
 	private Dimension closestToMouseDimension;  //used to draw the selection block
 	private Chess selectedChess;
 	
-	public ChineseChessPaintPane(ChinessChessGame chessGame, Image backgroundImage) throws IOException{
+	public ChineseChessPaintPanel(ChinessChessGame chessGame, Image backgroundImage) throws IOException{
 		this.chessGame = chessGame;
 		this.backgroundImage = backgroundImage;
 		this.selectedImage = ImageIO.read(new File("selected.png"));
 		setupDimensionBlock();
+		setFocusable(true);  //ensure that the keyboard event can be passed into the panel.
+		addKeyListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		chessGame.setCallback(this);
@@ -79,7 +87,7 @@ public class ChineseChessPaintPane extends JPanel implements CallBack, MouseList
         }
         	
         if (selectedChess != null)
-        {
+        {		
         	Dimension selectedDimension = chessDimensionBlock[selectedChess.getY()][selectedChess.getX()];
         	g.drawImage(selectedImage, (int)(selectedDimension.getWidth() - OFFSET_SELECTED_X - OFFSET_X), 
         			(int)(selectedDimension.getHeight() - OFFSET_SELECTED_Y - OFFSET_Y), 
@@ -94,8 +102,7 @@ public class ChineseChessPaintPane extends JPanel implements CallBack, MouseList
 
 	@Override
 	public void onPlayerTurn(Player player) {
-		// TODO Auto-generated method stub
-		
+		currentTurnPlayer = player;
 	}
 
 	@Override
@@ -112,35 +119,47 @@ public class ChineseChessPaintPane extends JPanel implements CallBack, MouseList
 
 	@Override
 	public void onGameOver(Player winner) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("The winner is " + winner.getTeam().toString() + ".");
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Dimension dimension = getClosestDimension(e.getX(), e.getY());
-		int x = 0, y = 0;
-		y_loop:
-		for (int i = 0 ; i < 10 ; i ++)
-			for (int j = 0 ; j < 9 ; j ++)
-				if (dimension == chessDimensionBlock[i][j])
-				{
-					y = i;
-					x = j;
-					break y_loop;
-				}
 		
-		System.out.println(x + "," + y);
-		selectedChess = chessBoard.getChess(x, y);
-		
-		repaint();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		Dimension dimension = getClosestDimension(e.getX(), e.getY());
+		int x = 0, y = 0;
+		
+		OutLoop:
+		for (int i = 0 ; i < 10 ; i ++)
+			for (int j = 0 ; j < 9 ; j ++)
+				if (dimension == chessDimensionBlock[i][j])
+				{
+					y = i;
+					x = j;
+					break OutLoop;
+				}
+
+		handleSelectedEvent(x, y);
+		repaint();
+	}
+	
+	private void handleSelectedEvent(int x, int y){
+		Chess chess = chessBoard.getChess(x, y);
+		if (selectedChess == null)
+			selectedChess = chess;
+		else
+		{
+			chessGame.moveChess(currentTurnPlayer, selectedChess, x, y);
+			selectedChess = null;
+			closestToMouseDimension = null;
+		}
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
@@ -180,4 +199,18 @@ public class ChineseChessPaintPane extends JPanel implements CallBack, MouseList
 		
 		return closestDimension;
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public void keyPressed(KeyEvent e) {}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_R)
+			chessGame.rollback();
+	}
+
+	
 }

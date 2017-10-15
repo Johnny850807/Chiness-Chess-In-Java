@@ -5,6 +5,7 @@ import java.util.Stack;
 import game.command.ChessMoveCommand;
 import game.factory.ChessPrototypeFactory;
 import game.item.chess.Chess;
+import game.item.chess.General;
 import game.player.Player;
 import game.validator.BlackUpRedDownChessLocationValidator;
 import game.validator.ChessLocationValidator;
@@ -54,19 +55,18 @@ public class ChessBoard{
 		putChess(prototyper.createChess(CANNON, RED), 7, 7);
 	}
 	
-	public ChessColor getWinColor(){
-		return ChessColor.NO_COLOR;
-	}
-	
 	public void executeMoveCommand(ChessMoveCommand chessMoveCommand){
 		moveCommandStack.push(chessMoveCommand);
 		chessMoveCommand.execute();
 	}
 	
 	public void rollback(){
-		ChessMoveCommand chessMoveCommand = moveCommandStack.pop();
-		chessMoveCommand.rollback();
-		chessMoveCommand = null;
+		if (!moveCommandStack.isEmpty())
+		{
+			ChessMoveCommand chessMoveCommand = moveCommandStack.pop();
+			chessMoveCommand.rollback();
+			chessMoveCommand = null;
+		}
 		System.gc();
 	}
 	
@@ -107,11 +107,19 @@ public class ChessBoard{
 		return chesses;
 	}
 	
-	public Chess[][] getClonedChesses(){
-		Chess[][] cloned = new Chess[10][9];
+	public ChessColor getWinColor(){
+		Chess blackGeneral = null, redGeneral = null;
 		for (int i = 0 ; i < 10 ; i ++)
 			for (int j = 0 ; j < 9 ; j ++)
-				cloned[i][j] = chesses[i][j];
-		return cloned;
+				if (chesses[i][j] instanceof General)
+				{
+					if (chesses[i][j].getColor() == RED)
+						redGeneral = chesses[i][j];
+					else
+						blackGeneral = chesses[i][j];
+				}
+					
+		return blackGeneral == null ? RED : 
+						redGeneral == null ? BLACK : NO_COLOR;
 	}
 }
