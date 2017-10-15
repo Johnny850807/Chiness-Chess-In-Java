@@ -6,7 +6,7 @@ import game.ChessBoard;
 import game.ChessColor;
 
 //¬¶
-public class Cannon extends Chess {
+public class Cannon extends NeedCountBlockingChess {
 
 	public Cannon(ChessBoard context, ChessColor color, Image img) {
 		super(context, color, img);
