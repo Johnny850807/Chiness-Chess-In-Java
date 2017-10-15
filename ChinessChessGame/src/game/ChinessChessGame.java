@@ -12,7 +12,7 @@ import game.validator.BlackUpRedDownChessLocationValidator;
 import game.validator.ChessLocationValidator;
 
 public class ChinessChessGame{
-	private Player[] players = {new HumanPlayer("Player1", ChessColor.BLACK), new HumanPlayer("Player2", ChessColor.RED)};
+	private Player[] players = {new HumanPlayer("Player2", ChessColor.BLACK), new HumanPlayer("Player1", ChessColor.RED)};
 	private ChessBoard chessBoard = new ChessBoard();
 	private Player nowTurnPlayer;  
 	private CallBack callback;
@@ -47,7 +47,7 @@ public class ChinessChessGame{
 		ChessColor winTeam = chessBoard.getWinColor();
 		if (winTeam == ChessColor.NO_COLOR)  // if nobody wins
 		{
-			nowTurnPlayer = nowTurnPlayer == players[0] ? players[1] : players[0];
+			nowTurnPlayer = nowTurnPlayer == players[1] ? players[0] : players[1];
 			callback.onPlayerTurn(nowTurnPlayer);
 		}
 		else
