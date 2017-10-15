@@ -34,7 +34,10 @@ public class Soildier extends Chess {
 	}
 	
 	private boolean isOnlyForward(int x, int y){
-		return x == getX() && y == getY() - 1;
+		if (getColor() == ChessColor.RED)
+			return x == getX() && y == getY() - 1;;
+			
+		return x == getX() && y == getY() + 1;
 	}
 
 }
