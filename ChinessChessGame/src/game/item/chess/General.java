@@ -29,8 +29,6 @@ public class General extends Chess {
 					return false;
 			return true;
 		}
-		if (context.hasChess(x, y) && context.getChess(x, y).getColor() == getColor())
-			return false;
 		if (context.isInsideCastle(getColor(), x, y) && ((Math.abs(getX() - x) == 1 && getY() == y) ||(getX() == x && Math.abs(getY() - y) == 1)))
 			return true;
 		return false;
