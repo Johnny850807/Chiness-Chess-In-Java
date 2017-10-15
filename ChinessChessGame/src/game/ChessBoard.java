@@ -31,11 +31,19 @@ public class ChessBoard {
 	}
 	
 	public boolean isAcrossCastle(Chess chess){
-		return false;
+		if (chess.getColor() == ChessColor.RED)
+			return chess.getY() >= 7 && chess.getY() <= 9
+					&& chess.getX() >= 3 && chess.getX() <= 5;
+		else
+			return chess.getY() >= 0 && chess.getY() <= 2
+					&& chess.getX() >= 3 && chess.getX() <= 5;
 	}
 	
 	public boolean isAcrossRiver(Chess chess){
-		return false;
+		if (chess.getColor() == ChessColor.RED)
+			return chess.getY() >= 5 && chess.getY() <= 9;
+		else
+			return chess.getY() >= 0 && chess.getY() <= 4;
 	}
 	
 	public Chess getChess(int x, int y){
