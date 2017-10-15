@@ -12,7 +12,8 @@ public class General extends Chess {
 		super(context, color, img);
 	}
 
-	public boolean canMoveTo(int x, int y) {
+	@Override
+	public boolean validateDistination(int x, int y) {
 		if (context.getChess(x, y) instanceof General) {
 			int high,low;
 			if (getY() > y) {
@@ -28,8 +29,6 @@ public class General extends Chess {
 					return false;
 			return true;
 		}
-		if (context.hasChess(x, y) && context.getChess(x, y).getColor() == getColor())
-			return false;
 		if (context.isInsideCastle(getColor(), x, y) && ((Math.abs(getX() - x) == 1 && getY() == y) ||(getX() == x && Math.abs(getY() - y) == 1)))
 			return true;
 		return false;

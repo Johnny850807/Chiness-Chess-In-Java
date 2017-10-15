@@ -12,7 +12,8 @@ public class Cannon extends Chess {
 		super(context, color, img);
 	}
 
-	public boolean canMoveTo(int x, int y) {
+	@Override
+	public boolean validateDistination(int x, int y) {
 		return false;
 	}
 

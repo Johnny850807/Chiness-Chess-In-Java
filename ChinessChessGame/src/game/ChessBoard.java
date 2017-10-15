@@ -9,14 +9,49 @@ import game.player.Player;
 import game.validator.BlackUpRedDownChessLocationValidator;
 import game.validator.ChessLocationValidator;
 
+import static game.ChessName.*;
+import static game.ChessColor.*;
+
 public class ChessBoard{
 	private ChessLocationValidator chessLocationValidator = new BlackUpRedDownChessLocationValidator();
 	private Chess[][] chesses = new Chess[10][9];
 	private Stack<ChessMoveCommand> moveCommandStack = new Stack<>();
-	private ChessPrototypeFactory prototypeFactory = new ChessPrototypeFactory(this);
+	private ChessPrototypeFactory prototyper = new ChessPrototypeFactory(this);
 	
 	public void setupBoard(){
+		putChess(prototyper.createChess(ROOK, BLACK), 0, 0);
+		putChess(prototyper.createChess(KNIGHT, BLACK), 1, 0);
+		putChess(prototyper.createChess(ELEPHANT, BLACK), 2, 0);
+		putChess(prototyper.createChess(ADVISOR, BLACK), 3, 0);
+		putChess(prototyper.createChess(GENERAL, BLACK), 4, 0);
+		putChess(prototyper.createChess(ADVISOR, BLACK), 5, 0);
+		putChess(prototyper.createChess(ELEPHANT, BLACK), 6, 0);
+		putChess(prototyper.createChess(KNIGHT, BLACK), 7, 0);
+		putChess(prototyper.createChess(ROOK, BLACK), 8, 0);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 0, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 2, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 4, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 6, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 8, 3);
+		putChess(prototyper.createChess(CANNON, BLACK), 1, 2);
+		putChess(prototyper.createChess(CANNON, BLACK), 7, 2);
 		
+		putChess(prototyper.createChess(ROOK, RED), 0, 9);
+		putChess(prototyper.createChess(KNIGHT, RED), 1, 9);
+		putChess(prototyper.createChess(ELEPHANT, RED), 2, 9);
+		putChess(prototyper.createChess(ADVISOR, RED), 3, 9);
+		putChess(prototyper.createChess(GENERAL, RED), 4, 9);
+		putChess(prototyper.createChess(ADVISOR, RED), 5, 9);
+		putChess(prototyper.createChess(ELEPHANT, RED), 6, 9);
+		putChess(prototyper.createChess(KNIGHT, RED), 7, 9);
+		putChess(prototyper.createChess(ROOK, RED), 8, 9);
+		putChess(prototyper.createChess(SOILDIER, RED), 0, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 2, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 4, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 6, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 8, 6);
+		putChess(prototyper.createChess(CANNON, RED), 1, 7);
+		putChess(prototyper.createChess(CANNON, RED), 7, 7);
 	}
 	
 	public ChessColor getWinColor(){
@@ -50,10 +85,14 @@ public class ChessBoard{
 	public Chess moveAndGetEatenChess(Chess chess, int x, int y){
 		Chess eatenChess = getChess(x, y);
 		chesses[chess.getY()][chess.getX()] = null;  // move from the current location, set null.
+		putChess(chess, x, y);
+		return eatenChess;
+	}
+	
+	public void putChess(Chess chess, int x, int y){
 		chesses[y][x] = chess; // the location the chess moves to, set the chess.
 		chess.setX(x); // then update the location.
 		chess.setY(y);
-		return eatenChess;
 	}
 	
 	public Chess getChess(int x, int y){

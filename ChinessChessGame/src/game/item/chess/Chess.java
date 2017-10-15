@@ -16,8 +16,19 @@ public abstract class Chess extends PaintObject implements Cloneable{
 		this.color = color;
 		this.image = img;
 	}
-
-	public abstract boolean canMoveTo(int x, int y);
+	
+	public boolean canMoveTo(int x, int y){
+		return validateEatenChessNotMineOrNull(x, y) && validateDistination(x, y);
+	}
+	
+	protected boolean validateEatenChessNotMineOrNull(int x, int y){
+		return !context.hasChess(x, y) || context.getChess(x, y).getColor() != getColor();
+	}
+	
+	/**
+	 * @return the boolean that whether the move matches the rule of the chess.
+	 */
+	protected abstract boolean validateDistination(int x, int y);
 	
 	public ChessBoard getContext() {
 		return context;

@@ -12,9 +12,8 @@ public class Elephant extends Chess {
 		super(context, color, img);
 	}
 
-	public boolean canMoveTo(int x, int y) {
-		if (context.hasChess(x, y) && context.getChess(x, y).getColor() == getColor())
-			return false;
+	@Override
+	public boolean validateDistination(int x, int y) {
 		if (context.isAcrossRiver(getColor(), x, y) && Math.abs(getX() - x) == 2 && Math.abs(getY() - y) == 2)
 			return true;
 		return false;
