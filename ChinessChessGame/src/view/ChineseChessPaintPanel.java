@@ -169,7 +169,7 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 			onMoveRejected(currentTurnPlayer, chess);
 		else
 		{
-			if (selectedChess == null) //finish the selection phase.
+			if (selectedChess == null || (chess != null && chess.getColor() == currentTurnPlayer.getTeam())) //finish the selection phase.
 				selectedChess = chess;
 			else
 			{
