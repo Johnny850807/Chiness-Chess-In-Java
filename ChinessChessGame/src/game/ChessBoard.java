@@ -9,14 +9,17 @@ import game.player.Player;
 import game.validator.BlackUpRedDownChessLocationValidator;
 import game.validator.ChessLocationValidator;
 
+import static game.ChessName.*;
+import static game.ChessColor.*;
+
 public class ChessBoard{
 	private ChessLocationValidator chessLocationValidator = new BlackUpRedDownChessLocationValidator();
 	private Chess[][] chesses = new Chess[10][9];
 	private Stack<ChessMoveCommand> moveCommandStack = new Stack<>();
-	private ChessPrototypeFactory prototypeFactory = new ChessPrototypeFactory(this);
+	private ChessPrototypeFactory prototyper = new ChessPrototypeFactory(this);
 	
 	public void setupBoard(){
-		
+		putChess(prototyper.createChess(ROOK, BLACK), x, y);
 	}
 	
 	public ChessColor getWinColor(){
@@ -50,10 +53,14 @@ public class ChessBoard{
 	public Chess moveAndGetEatenChess(Chess chess, int x, int y){
 		Chess eatenChess = getChess(x, y);
 		chesses[chess.getY()][chess.getX()] = null;  // move from the current location, set null.
+		putChess(chess, x, y);
+		return eatenChess;
+	}
+	
+	public void putChess(Chess chess, int x, int y){
 		chesses[y][x] = chess; // the location the chess moves to, set the chess.
 		chess.setX(x); // then update the location.
 		chess.setY(y);
-		return eatenChess;
 	}
 	
 	public Chess getChess(int x, int y){

@@ -24,10 +24,9 @@ public class ChessPrototypeFactory {
 	}
 
 	public Chess createChess(ChessName name, ChessColor color) {
-		return null;
+		return chessMap.get(new ChessInfo(name, color)).clone();  // shadow clone
 	}
 
-	
 	public static class ChessInfo{
 		private ChessName chessName;
 		private ChessColor chessColor;
