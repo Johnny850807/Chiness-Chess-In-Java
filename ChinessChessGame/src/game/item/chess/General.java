@@ -14,6 +14,14 @@ public class General extends Chess {
 
 	@Override
 	public boolean validateDistination(int x, int y) {
+		if (isFaceToFace(x, y)) 
+			return true;
+		if (context.isInsideCastle(getColor(), x, y) && isMoveOnlyOne(x, y))
+			return true;
+		return false;
+	}
+	
+	private boolean isFaceToFace(int x, int y) {
 		if (context.getChess(x, y) instanceof General) {
 			int high,low;
 			if (getY() > y) {
@@ -29,9 +37,11 @@ public class General extends Chess {
 					return false;
 			return true;
 		}
-		if (context.isInsideCastle(getColor(), x, y) && ((Math.abs(getX() - x) == 1 && getY() == y) ||(getX() == x && Math.abs(getY() - y) == 1)))
-			return true;
 		return false;
 	}
 
+	private boolean isMoveOnlyOne(int x, int y) {
+		return (Math.abs(getX() - x) == 1 && getY() == y) || (getX() == x && Math.abs(getY() - y) == 1);
+	}
+	
 }
