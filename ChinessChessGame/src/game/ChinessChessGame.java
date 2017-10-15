@@ -8,9 +8,10 @@ import game.command.ChessMoveCommandImp;
 import game.item.chess.Chess;
 import game.player.HumanPlayer;
 import game.player.Player;
+import game.validator.BlackUpRedDownChessLocationValidator;
+import game.validator.ChessLocationValidator;
 
-public class ChinessChessGame {
-
+public class ChinessChessGame{
 	private Player[] players = {new HumanPlayer("Player1", ChessColor.BLACK), new HumanPlayer("Player2", ChessColor.RED)};
 	private ChessBoard chessBoard = new ChessBoard();
 	private Player nowTurnPlayer;  

@@ -6,8 +6,11 @@ import game.command.ChessMoveCommand;
 import game.factory.ChessPrototypeFactory;
 import game.item.chess.Chess;
 import game.player.Player;
+import game.validator.BlackUpRedDownChessLocationValidator;
+import game.validator.ChessLocationValidator;
 
 public class ChessBoard {
+	private ChessLocationValidator chessLocationValidator = new BlackUpRedDownChessLocationValidator();
 	private Chess[][] chesses = new Chess[10][9];
 	private Stack<ChessMoveCommand> moveCommandStack = new Stack<>();
 	private ChessPrototypeFactory prototypeFactory = new ChessPrototypeFactory(this);
@@ -30,20 +33,12 @@ public class ChessBoard {
 		chessMoveCommand.rollback();
 	}
 	
-	public boolean isAcrossCastle(Chess chess){
-		if (chess.getColor() == ChessColor.RED)
-			return chess.getY() >= 7 && chess.getY() <= 9
-					&& chess.getX() >= 3 && chess.getX() <= 5;
-		else
-			return chess.getY() >= 0 && chess.getY() <= 2
-					&& chess.getX() >= 3 && chess.getX() <= 5;
+	public boolean isAcrossCastle(ChessColor color, int x, int y){
+		return chessLocationValidator.isAcrossCastle(color, x, y);
 	}
 	
-	public boolean isAcrossRiver(Chess chess){
-		if (chess.getColor() == ChessColor.RED)
-			return chess.getY() >= 5 && chess.getY() <= 9;
-		else
-			return chess.getY() >= 0 && chess.getY() <= 4;
+	public boolean isAcrossRiver(ChessColor color, int x, int y){
+		return chessLocationValidator.isAcrossRiver(color, x, y);
 	}
 	
 	public Chess getChess(int x, int y){
