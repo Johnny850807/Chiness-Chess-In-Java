@@ -75,6 +75,7 @@ public class ChinessChessGame{
 	public void rollback() {
 		System.out.println("Rollback enforcing.");
 		chessBoard.rollback();
+		onNextPlayerTurn();
 		callback.onGameStatusUpdated(chessBoard);
 	}
 	
