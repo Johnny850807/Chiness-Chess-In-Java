@@ -19,7 +19,39 @@ public class ChessBoard{
 	private ChessPrototypeFactory prototyper = new ChessPrototypeFactory(this);
 	
 	public void setupBoard(){
-		putChess(prototyper.createChess(ROOK, BLACK), x, y);
+		putChess(prototyper.createChess(ROOK, BLACK), 0, 0);
+		putChess(prototyper.createChess(KNIGHT, BLACK), 1, 0);
+		putChess(prototyper.createChess(ELEPHANT, BLACK), 2, 0);
+		putChess(prototyper.createChess(ADVISOR, BLACK), 3, 0);
+		putChess(prototyper.createChess(GENERAL, BLACK), 4, 0);
+		putChess(prototyper.createChess(ADVISOR, BLACK), 5, 0);
+		putChess(prototyper.createChess(ELEPHANT, BLACK), 6, 0);
+		putChess(prototyper.createChess(KNIGHT, BLACK), 7, 0);
+		putChess(prototyper.createChess(ROOK, BLACK), 8, 0);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 0, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 2, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 4, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 6, 3);
+		putChess(prototyper.createChess(SOILDIER, BLACK), 8, 3);
+		putChess(prototyper.createChess(CANNON, BLACK), 1, 2);
+		putChess(prototyper.createChess(CANNON, BLACK), 7, 2);
+		
+		putChess(prototyper.createChess(ROOK, RED), 0, 9);
+		putChess(prototyper.createChess(KNIGHT, RED), 1, 9);
+		putChess(prototyper.createChess(ELEPHANT, RED), 2, 9);
+		putChess(prototyper.createChess(ADVISOR, RED), 3, 9);
+		putChess(prototyper.createChess(GENERAL, RED), 4, 9);
+		putChess(prototyper.createChess(ADVISOR, RED), 5, 9);
+		putChess(prototyper.createChess(ELEPHANT, RED), 6, 9);
+		putChess(prototyper.createChess(KNIGHT, RED), 7, 9);
+		putChess(prototyper.createChess(ROOK, RED), 8, 9);
+		putChess(prototyper.createChess(SOILDIER, RED), 0, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 2, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 4, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 6, 6);
+		putChess(prototyper.createChess(SOILDIER, RED), 8, 6);
+		putChess(prototyper.createChess(CANNON, RED), 1, 7);
+		putChess(prototyper.createChess(CANNON, RED), 7, 7);
 	}
 	
 	public ChessColor getWinColor(){
