@@ -14,7 +14,7 @@ public class Knight extends Chess {
 
 	@Override
 	public boolean validateDistination(int x, int y) {
-		if (is¤é(x, y) && isBlockedOnTheWay(x, y)) 
+		if (is¤é(x, y) && !isBlockedOnTheWay(x, y)) 
 			return true;
 		return false;
 	}
@@ -29,9 +29,9 @@ public class Knight extends Chess {
 		else if (getX() - x == 2) 
 			return context.hasChess(getX() - 1, getY());
 		else if (y - getY() == 2)
-			return context.hasChess(getX(), getY() - 1);
-		else if (getY() - y == 2)
 			return context.hasChess(getX(), getY() + 1);
+		else if (getY() - y == 2)
+			return context.hasChess(getX(), getY() - 1);
 		return false;
 	}
 	
