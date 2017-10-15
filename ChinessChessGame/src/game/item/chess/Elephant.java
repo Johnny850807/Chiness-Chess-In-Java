@@ -19,7 +19,6 @@ public class Elephant extends Chess {
 		return false;
 	}
 	
-	
 	private boolean isBlockedOnTheWay(int x, int y){
 		if (x > getX() && y > getY())
 			return context.hasChess(getX() + 1, getY() + 1);
