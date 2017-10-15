@@ -165,7 +165,7 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 		Chess chess = chessBoard.getChess(x, y);
 		
 		//if this is a selection phase, you cannot choose the opposite color.
-		if (selectedChess == null && chess.getColor() != currentTurnPlayer.getTeam())
+		if (selectedChess == null && chess != null && chess.getColor() != currentTurnPlayer.getTeam())
 			onMoveRejected(currentTurnPlayer, chess);
 		else
 		{
