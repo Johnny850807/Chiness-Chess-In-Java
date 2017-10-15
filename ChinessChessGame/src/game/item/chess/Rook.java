@@ -11,8 +11,9 @@ public class Rook extends Chess {
 	public Rook(ChessBoard context, ChessColor color, Image img) {
 		super(context, color, img);
 	}
-
-	public boolean canMoveTo(int x, int y) {
+	
+	@Override
+	public boolean validateDistination(int x, int y) {
 		return false;
 	}
 

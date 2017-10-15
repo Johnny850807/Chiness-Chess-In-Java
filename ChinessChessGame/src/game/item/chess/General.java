@@ -12,7 +12,8 @@ public class General extends Chess {
 		super(context, color, img);
 	}
 
-	public boolean canMoveTo(int x, int y) {
+	@Override
+	public boolean validateDistination(int x, int y) {
 		if (context.getChess(x, y) instanceof General) {
 			int high,low;
 			if (getY() > y) {
