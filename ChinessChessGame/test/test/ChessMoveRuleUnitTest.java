@@ -73,7 +73,7 @@ public class ChessMoveRuleUnitTest {
 		
 		knight = chessBoard.getChess(7, 9); //right knight
 		assertTrue(knight.canMoveTo(6, 7)); //can go left vertically without block
-		assertTrue(knight.canMoveTo(0, 8)); //can go right vertically without block
+		assertTrue(knight.canMoveTo(8, 7)); //can go right vertically without block
 		assertTrue(!knight.canMoveTo(5, 8)); //cannot go left horizontally with right block
 		
 		chessBoard.moveAndGetEatenChess(knight, 6, 7); // let's have a block forward
