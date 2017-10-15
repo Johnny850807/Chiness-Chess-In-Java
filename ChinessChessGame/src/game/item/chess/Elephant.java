@@ -14,7 +14,7 @@ public class Elephant extends Chess {
 
 	@Override
 	public boolean validateDistination(int x, int y) {
-		if (context.isAcrossRiver(getColor(), x, y) && Math.abs(getX() - x) == 2 && Math.abs(getY() - y) == 2)
+		if (!context.isAcrossRiver(getColor(), x, y) && Math.abs(getX() - x) == 2 && Math.abs(getY() - y) == 2)
 			return true;
 		return false;
 	}
