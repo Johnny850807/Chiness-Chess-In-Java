@@ -47,7 +47,7 @@ public class ChinessChessGame{
 		ChessColor winTeam = chessBoard.getWinColor();
 		if (winTeam == ChessColor.NO_COLOR)  // if nobody wins
 		{
-			nowTurnPlayer = nowTurnPlayer == players[1] ? players[1] : players[0];
+			nowTurnPlayer = nowTurnPlayer == players[0] ? players[1] : players[0];
 			callback.onPlayerTurn(nowTurnPlayer);
 		}
 		else
