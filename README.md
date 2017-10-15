@@ -10,5 +10,4 @@ The project shows an answer.
 3. type `java -jar ChinessChessGame.jar`
 
 
-
-![image](https://user-images.githubusercontent.com/23109467/31587730-7dce839e-b219-11e7-93bb-04302077959f.png)
+![image](https://user-images.githubusercontent.com/23109467/31587745-b0211e38-b219-11e7-8c94-29f972222f74.png)
