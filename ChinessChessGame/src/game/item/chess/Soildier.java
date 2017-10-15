@@ -18,17 +18,16 @@ public class Soildier extends Chess {
 
 	@Override
 	public boolean validateDistination(int x, int y) {
-		if (context.isAcrossRiver(getColor(), x, y))
-			return isStraightAndForward(x, y);
+		if (context.isAcrossRiver(getColor(), getX(), getY()))
+			return isLeftOrRight(x, y) || isOnlyForward(x, y);
 		
 		return isOnlyForward(x, y);
 	}
 	
-	private boolean isStraightAndForward(int x, int y){
+	private boolean isLeftOrRight(int x, int y){
 		Set<Dimension> straightSet = new HashSet<>();
 		straightSet.add(new Dimension(getX() + 1, getY()));
 		straightSet.add(new Dimension(getX() - 1, getY()));
-		straightSet.add(new Dimension(getX(), getY() - 1));
 		
 		return straightSet.contains(new Dimension(x, y));
 	}
