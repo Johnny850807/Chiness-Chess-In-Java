@@ -12,16 +12,16 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.sound.midi.MidiDevice.Info;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.xml.bind.Marshaller.Listener;
 
 import game.CallBack;
 import game.ChessBoard;
 import game.ChessColor;
 import game.ChinessChessGame;
 import game.item.chess.Chess;
+import game.player.HumanPlayer;
+import game.player.HumanPlayer.MoveInfo;
 import game.player.Player;
 import media.SoundPlayer;
 
@@ -173,7 +173,7 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 				selectedChess = chess;
 			else
 			{
-				chessGame.moveChess(currentTurnPlayer, selectedChess, x, y); //moving phase.
+				HumanPlayer.setCommand(new MoveInfo(currentTurnPlayer, selectedChess, x, y));
 				selectedChess = null;
 				closestToMouseDimension = null;
 			}

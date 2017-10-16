@@ -12,8 +12,8 @@ import game.validator.BlackUpRedDownChessLocationValidator;
 import game.validator.ChessLocationValidator;
 
 public class ChinessChessGame{
-	private Player[] players = {new HumanPlayer("Player2", ChessColor.BLACK), new HumanPlayer("Player1", ChessColor.RED)};
 	private ChessBoard chessBoard = new ChessBoard();
+	private Player[] players;
 	private Player nowTurnPlayer;  
 	private CallBack callback;
 	private boolean gameStarted = false;
@@ -22,9 +22,15 @@ public class ChinessChessGame{
 		if (callback == null)
 			throw new RuntimeException("Callback should be set.");
 		
+		players = getPlayers();
 		setupBoardAsync();
 	}
 	
+	private Player[] getPlayers() {
+		return new Player[]{new HumanPlayer(this, "Player2", ChessColor.BLACK), 
+				new HumanPlayer(this, "Player1", ChessColor.RED)};
+	}
+
 	public void setCallback(CallBack callback) {
 		this.callback = callback;
 	}
@@ -47,7 +53,10 @@ public class ChinessChessGame{
 		ChessColor winTeam = chessBoard.getWinColor();
 		nowTurnPlayer = nowTurnPlayer == players[1] ? players[0] : players[1];
 		if (winTeam == ChessColor.NO_COLOR)  // if nobody wins
+		{
 			callback.onPlayerTurn(nowTurnPlayer);
+			nowTurnPlayer.runChoice();
+		}
 		else
 			callback.onGameOver(players[0].getTeam() == winTeam ? players[0] : players[1]);
 		
