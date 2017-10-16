@@ -55,7 +55,7 @@ public class ChessPrototypeFactory {
 	}
 
 	public Chess createChess(ChessName name, ChessColor color) {
-		return chessMap.get(new ChessInfo(name, color)).clone();  // shadow clone
+		return chessMap.get(new ChessInfo(name, color)).clone();  // shallow clone
 	}
 
 	public static class ChessInfo{

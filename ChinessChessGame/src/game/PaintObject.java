@@ -2,7 +2,7 @@ package game;
 
 import java.awt.Image;
 
-public class PaintObject {
+public class PaintObject implements Cloneable{
 	protected int x;
 	protected int y;
 	protected Image image;
@@ -26,12 +26,14 @@ public class PaintObject {
 		this.image = image;
 	}
 	
-	public PaintObject clone(){
-		try {
-			return (PaintObject)super.clone();
-		} catch (CloneNotSupportedException e) {
+	@Override
+	protected Object clone(){
+		try{
+			return super.clone();
+		}catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+
 	}
 }

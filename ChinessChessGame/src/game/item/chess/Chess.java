@@ -6,7 +6,7 @@ import game.ChessColor;
 import game.ChinessChessGame;
 import game.PaintObject;
 
-public abstract class Chess extends PaintObject implements Cloneable{
+public abstract class Chess extends PaintObject{
 	protected ChessBoard context;
 	protected ChessColor color;
 

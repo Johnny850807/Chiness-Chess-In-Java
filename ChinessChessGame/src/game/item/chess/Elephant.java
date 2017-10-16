@@ -22,9 +22,9 @@ public class Elephant extends Chess {
 	private boolean isBlockedOnTheWay(int x, int y){
 		if (x > getX() && y > getY())
 			return context.hasChess(getX() + 1, getY() + 1);
-		if (x > getX() && y < getY())
+		else if (x > getX() && y < getY())
 			return context.hasChess(getX() + 1, getY() - 1);
-		if (x < getX() && y > getY())
+		else if (x < getX() && y > getY())
 			return context.hasChess(getX() - 1, getY() + 1);
 		else
 			return context.hasChess(getX() - 1, getY() - 1);

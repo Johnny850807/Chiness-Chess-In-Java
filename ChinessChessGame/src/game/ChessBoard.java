@@ -122,4 +122,5 @@ public class ChessBoard{
 		return blackGeneral == null ? RED : 
 						redGeneral == null ? BLACK : NO_COLOR;
 	}
+	
 }
