@@ -26,6 +26,12 @@ import game.player.Player;
 import media.SoundPlayer;
 
 public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseListener, MouseMotionListener, KeyListener{
+	private final int CHESS_SIZE = 55;
+	private final int SELECTED_BLOCK_SIZE = 58;
+	private final int OFFSET_X = 25;
+	private final int OFFSET_Y = 24;
+	private final int OFFSET_SELECTED_X = 1;
+	private final int OFFSET_SELECTED_Y = 4;
 	private Image backgroundImage;
 	private Image selectedImageRed;
 	private Image selectedImageBlack;
@@ -63,15 +69,14 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        final int CHESS_SIZE = 55;
-        final int SELECTED_BLOCK_SIZE = 58;
-        final int OFFSET_X = 25;
-        final int OFFSET_Y = 24;
-        final int OFFSET_SELECTED_X = 1;
-        final int OFFSET_SELECTED_Y = 4;
         g.drawImage(backgroundImage, 0, 0, null);
-        
-        Chess[][] chessStatus = chessBoard.getChesses();
+        drawAllChesses(g);
+        drawMouseBlock(g);
+        drawSelectedChessBlock(g);
+    }
+	
+	private void drawAllChesses(Graphics g){
+		Chess[][] chessStatus = chessBoard.getChesses();
         for (int y = 0 ; y < 10 ; y ++)
         	for (int x = 0 ; x < 9 ; x ++)
         	{
@@ -80,22 +85,26 @@ public class ChineseChessPaintPanel extends JPanel implements CallBack, MouseLis
 	        		g.drawImage(chessStatus[y][x].getImage(), (int)(dimension.getWidth() - OFFSET_X), (int)(dimension.getHeight() - OFFSET_Y), 
 	        				CHESS_SIZE, CHESS_SIZE, null);
         	}
-        
-        if (closestToMouseDimension != null)
+	}
+	
+	private void drawMouseBlock(Graphics g){
+		if (closestToMouseDimension != null)
         {
         	g.drawImage(getSelectedImageByCurrectPlayer(), (int)(closestToMouseDimension.getWidth() - OFFSET_SELECTED_X - OFFSET_X), 
         			(int)(closestToMouseDimension.getHeight() - OFFSET_SELECTED_Y - OFFSET_Y), 
         				SELECTED_BLOCK_SIZE, SELECTED_BLOCK_SIZE, null);
         }
-        	
-        if (selectedChess != null)
+	}
+
+	private void drawSelectedChessBlock(Graphics g){
+		if (selectedChess != null)
         {		
         	Dimension selectedDimension = chessDimensionBlock[selectedChess.getY()][selectedChess.getX()];
         	g.drawImage(getSelectedImageByCurrectPlayer(), (int)(selectedDimension.getWidth() - OFFSET_SELECTED_X - OFFSET_X), 
         			(int)(selectedDimension.getHeight() - OFFSET_SELECTED_Y - OFFSET_Y), 
         				SELECTED_BLOCK_SIZE, SELECTED_BLOCK_SIZE, null);
         }
-    }
+	}
 	
 	private Image getSelectedImageByCurrectPlayer(){
 		return currentTurnPlayer.getTeam() == ChessColor.RED ? selectedImageRed : selectedImageBlack;
